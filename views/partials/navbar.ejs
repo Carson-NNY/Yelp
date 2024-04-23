@@ -1,0 +1,35 @@
+<!-- nav bar的模版从boostrap官网上copy: https://getbootstrap.com/docs/5.3/components/navbar/ -->
+<!-- 然后自己再改动自己想要的细节 -->
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark ">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Yelpcamp</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link " href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/campgrounds">Camgrounds</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/campgrounds/new">New Camground</a>
+        </li>
+
+      </ul>
+
+      <!-- ms-auto help us to move this component to the right of the navbar -->
+      <ul class="navbar-nav ms-auto">
+        <% if(!currentUser) {%>
+          <a class="nav-link" href="/login">Log in</a>
+          <a class="nav-link" href="/register">Register</a>
+        <% } else {%>
+            <a class="nav-link" href="/logout">Log out</a>
+          <% } %>
+      </ul>
+    </div>
+  </div>
+</nav>

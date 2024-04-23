@@ -1,0 +1,17 @@
+<!-- 记得要include layout -->
+<%layout('layouts/boilerplate') %>
+    <div class="row">
+        <div class="col-6 offset-3">
+            <!-- 从bootstrap 官网复制的 error alert -->
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading"><%= err.message %> </h4>
+                <!-- if(process.env.NODE_ENV !== "production") is a conditional statement that executes the code inside the
+                 if block only if the application is not running in a production environment. This is commonly used to include 
+                 code that should only be executed during development or testing, such as:Detailed error messages or debugging information. or Configurations that are meant for development, -->
+                 <!--  这个只在 deploy之后才起作用, 平时自己测试这里还是production mode没影响 -->
+                <% if(process.env.NODE_ENV !== "production"){ %>
+                    <p><%= err.stack %></p>
+                <% } %>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,72 @@
+<!-- edit.ejs -->
+<%layout('layouts/boilerplate') %><!--把下面的内容放到 boilerplate并且显示  -->
+
+
+    <!-- put everything in the grid -->
+    <div class="row">
+        <h1 class="text-center">Edit Campground</h1>
+        <!--  another way to center the content -->
+        <div class="col-md-6 offset-md-3">
+            <!--  可以参考bootstrap官网的 form里面的各种形式 , 下面的代码借鉴了, 注意: 我为了加入更新上传多个图片选择, 加入: enctype="multipart/form-data" -->
+            <form action="/campgrounds/<%=campground._id%>?_method=PUT" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+                <div class="mb-2">
+                    <label class="form-label" for="title">Title</label>
+                    <!-- name="campground[title]"能够使得 data sent via POST request to be grouped 
+            under campground, which helps organize it -->
+                    <input class="form-control" type="text" id="title" name="campground[title]"
+                        value="<%=campground.title%>" required>
+                    <div class="valid-feedback"> valid! </div>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label" for="location">Location</label>
+                    <!-- name="campground[title]"能够使得 data sent via POST request to be grouped under campground -->
+                    <input class="form-control" type="text" id="location" name="campground[location]"
+                        value="<%=campground.location%>" required>
+                    <div class="valid-feedback"> valid! </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label" for="price">Campground Price</label>
+                    <div class="input-group ">
+                        <span class="input-group-text" id="price-label">$</span>
+                        <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price"
+                            aria-describedby="price-label" name="campground[price]" value="<%=campground.price%>"
+                            required>
+                        <div class="valid-feedback"> valid! </div>
+                    </div>
+                </div>
+                <div class=" mb-2">
+                    <label class="form-label" for="description">Description</label>
+                    <!-- 注: 这里不加入value 因为不是input form -->
+                    <textarea class="form-control" type="text" id="description" name="campground[description]"
+                        required> <%=campground.description %></textarea>
+                    <div class="valid-feedback"> valid! </div>
+                </div>
+                <div class="mb-3">
+                    <!-- bootstrap上从 form里的 上传file弄来的code -->
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="image" name="image" multiple>
+                        <label class="custom-file-label" for="image">Add images</label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <% campground.images.forEach(function(img,i) { %>
+                    <!-- class="img-thumbnail" can display the image about the same size -->
+                        <img src="<%=img.thumbnail%>" class="img-thumbnail" alt="">
+                        <div class="form-check-inline">
+                            <!-- when we check the checkbox, img.filname will be added to the array deleteImages[]  -->
+                            <input type="checkbox" id="image-<%=i%>" name="deleteImages[]" value="<%=img.filename%>" >
+                        </div>
+                         <label for="image-<%=i%>">Delete</label>
+                    <% }) %>
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-info">Update Campground</button>
+
+                </div>
+            </form>
+            <a href="/campgrounds/<%=campground._id%>">Back to Campgrounds</a>
+
+
+        </div>
+    </div>

@@ -1,0 +1,63 @@
+<!-- new.ejs -->
+<%layout('layouts/boilerplate') %>
+    <!-- put everything in the grid (先.row, 再 .col 这种格式) -->
+    <div class="row">
+        <h1 class="text-center">New Campground</h1>
+        <!--  another way to center the content -->
+        <div class="col-md-6 offset-md-3">
+         
+                    <!--  可以参考bootstrap官网的 form里面的各种形式 , 下面的代码借鉴了~-->
+                    <!-- 对于error handle一种形式(不能输入空白内容)使用bootstrap的功能: 现在form里放入novalidateclass="validated-form", 
+            然后在每个input里面加入 required, 最后加入从bootstrap的validation中提取的script code (put it int the boilerplate file).
+            enctype="multipart/form-data" is needed if we want to upload the file in the form-->
+                    <form action="/campgrounds" method="POST" novalidate class="validated-form"
+                        enctype="multipart/form-data">
+                        <div class="mb-2">
+                            <label class="form-label" for="title">Title</label>
+                            <!-- name="campground[title]"能够使得 data sent via POST request to be grouped 
+            under campground, which helps organize it -->
+                            <input class="form-control" type="text" id="title" name="campground[title]" required>
+                            <!-- <div class="valid-feedback"> 如果出现vilate出现红框之后, user再输入valid
+                     input后 能显示一些提示内容 -->
+                            <div class="valid-feedback"> valid! </div>
+
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label" for="location">Location</label>
+                            <input class="form-control" type="text" id="location" name="campground[location]" required>
+                            <div class="valid-feedback"> valid! </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="price">Campground Price</label>
+                            <div class="input-group ">
+                                <span class="input-group-text" id="price-label">$</span>
+                                <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price"
+                                    aria-describedby="price-label" name="campground[price]" required>
+                            </div>
+                            <div class="valid-feedback"> valid! </div>
+                        </div>
+                        <div class=" mb-2">
+                            <label class="form-label" for="description">Description</label>
+                            <textarea class="form-control" type="text" id="description" name="campground[description]"
+                                required></textarea>
+                            <div class="valid-feedback"> valid! </div>
+                        </div>
+                        <div class="mb-3">
+                            <!-- bootstrap上从 form里的 上传file弄来的code -->
+                            <div class="custom-file">
+                                <!-- "multiple" in the end is needed if we want to upload multuple files at a time -->
+
+                                <input type="file" class="custom-file-input" id="image" name="image" multiple>
+                                <label class="custom-file-label" for="image">Choose images</label>
+
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <button class="btn btn-success">Add Campground</button>
+                        </div>
+                    </form>
+                    <a href="/campgrounds">All Campgrounds</a>
+
+                </div>
+    </div>
