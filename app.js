@@ -6,6 +6,7 @@ if (process.env.NODE_ENV !== "production") {
     require('dotenv').config();
 }
 
+//  test
 
 
 const express = require('express')
@@ -62,6 +63,7 @@ const store = MongoDBStore.create({
         secret: 'thisshouldbeabettersecret!'
     }
 });
+
 
 store.on("error", function(e){
     console.log("SESSION STORE ERROR",e)
